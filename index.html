@@ -3,29 +3,33 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<meta charset="UTF-8">
-		<title>First anniversary of love</title>
+		<title>Happy 1st Anniversary, Mahal!</title>
 		<link rel="stylesheet" type="text/css" href="./css/format.css">
 	</head>
 
 	<body style="margin:0px">
-		<audio autoplay loop>
+		<audio id="bgm" autoplay loop>
 			<source src="music/music.mp3" type="audio/mpeg">
-			Your browser does not support the audio.
+			Your browser does not support the audio element.
 		</audio>
+		
 		<canvas></canvas>
+
 		<div id="imgTxt">
 			<span id="Txt"></span> <br />
 			<span id="tmp"></span>
 			<img id="img" src="">
 		</div>
+
 		<div id="heartTxt">
-			<span id="clickMe">Click!</span>
+			<span id="clickMe">Click Me, Mahal!</span>
 			<div id="heart">
 				<button id="button" onclick="play()"></button>
 			</div>
 		</div>
+
 		<div id="content">
-			<h2 id="together">We have been together</h2>
+			<h2 id="together">Mahal, we have been together for</h2>
 			<div id="timer">
 				<b id="d"></b> Days 
 				<b id="h"></b> Hours
@@ -34,26 +38,111 @@
 			</div>
 		</div>
 
-    	<div id = "typeDiv">
-        	<span id="txt1"></span> <br />
-        	<span id="txt2"></span>
-    	</div>		
+		<div id="typeDiv">
+			<span id="txt1"></span> <br />
+			<span id="txt2"></span>
+		</div>		
 
-		<script >
+		<script>
 			var ok = 0;
 			var flag = 1;
 			var myImage = document.getElementById("img");
 			var myTxt = document.getElementById("Txt");
-			var imageArray = ["pic/pic1.png", "pic/pic2.png", "pic/pic3.png", "pic/pic4.png", "pic/pic5.png", "pic/pic6.png", 
-			"pic/pic7.png", "pic/pic8.png", "pic/pic9.png", "pic/pic10.png", "pic/pic11.png", "pic/pic12.png", "pic/pic13.png",
-			"pic/pic14.png", "pic/pic15.png", "pic/pic16.png"];
+			
+			// 26 Photo Groups (A to Z) with 2 to 5 photos each
+			var imageGroupArray = [
+				["pic/picA1.jpg", "pic/picA2.jpg", "pic/picA3.jpg", "pic/picA4.jpg"],                     // A: Arcade (4)
+				["pic/picB1.jpg", "pic/picB2.jpg", "pic/picB3.jpg"],                                       // B: Baking (3)
+				["pic/picC1.jpg", "pic/picC2.jpg", "pic/picC3.jpg", "pic/picC4.jpg"],                     // C: Coffee (4)
+				["pic/picD1.jpg", "pic/picD2.jpg", "pic/picD3.jpg"],                                       // D: Dolomite (3)
+				["pic/picE1.jpg", "pic/picE2.jpg"],                                                       // E: Every day (2)
+				["pic/picF1.jpg", "pic/picF2.jpg", "pic/picF3.jpg", "pic/picF4.jpg", "pic/picF5.jpg"],     // F: First date (5)
+				["pic/picG1.jpg", "pic/picG2.jpg", "pic/picG3.jpg"],                                       // G: Groceries (3)
+				["pic/picH1.jpg", "pic/picH2.jpg"],                                                       // H: Hugs (2)
+				["pic/picI1.jpg", "pic/picI2.jpg", "pic/picI3.jpg", "pic/picI4.jpg"],                     // I: Inspection Side Quest (4)
+				["pic/picJ1.jpg", "pic/picJ2.jpg", "pic/picJ3.jpg"],                                       // J: Just us movies (3)
+				["pic/picK1.jpg", "pic/picK2.jpg"],                                                       // K: Kissing (2)
+				["pic/picL1.jpg", "pic/picL2.jpg", "pic/picL3.jpg", "pic/picL4.jpg", "pic/picL5.jpg"],     // L: LDR Video calls (5)
+				["pic/picM1.jpg", "pic/picM2.jpg", "pic/picM3.jpg", "pic/picM4.jpg"],                     // M: Manila Ocean Park (4)
+				["pic/picN1.jpg", "pic/picN2.jpg", "pic/picN3.jpg"],                                       // N: Night dates (3)
+				["pic/picO1.jpg", "pic/picO2.jpg", "pic/picO3.jpg"],                                       // O: Our bahay-bahayan (3)
+				["pic/picP1.jpg", "pic/picP2.jpg"],                                                       // P: Picnics (2)
+				["pic/picQ1.jpg", "pic/picQ2.jpg"],                                                       // Q: Quiet moments (2)
+				["pic/picR1.jpg", "pic/picR2.jpg", "pic/picR3.jpg", "pic/picR4.jpg"],                     // R: Roadtrip Tagaytay (4)
+				["pic/picS1.jpg", "pic/picS2.jpg", "pic/picS3.jpg", "pic/picS4.jpg"],                     // S: Swimming (4)
+				["pic/picT1.jpg", "pic/picT2.jpg", "pic/picT3.jpg"],                                       // T: Thinking of you (3)
+				["pic/picU1.jpg", "pic/picU2.jpg"],                                                       // U: Us (2)
+				["pic/picV1.jpg", "pic/picV2.jpg", "pic/picV3.jpg"],                                       // V: Valentines (3)
+				["pic/picW1.jpg", "pic/picW2.jpg", "pic/picW3.jpg", "pic/picW4.jpg"],                     // W: Walk dates (4)
+				["pic/picX1.jpg", "pic/picX2.jpg"],                                                       // X: eXtra special (2)
+				["pic/picY1.jpg", "pic/picY2.jpg", "pic/picY3.jpg", "pic/picY4.jpg"],                     // Y: Your birthmonth (4)
+				["pic/picZ1.jpg", "pic/picZ2.jpg", "pic/picZ3.jpg"]                                       // Z: Zzz sleeping (3)
+			];
+
+			// Flattened image array for slideshow engine compatibility
+			var imageArray = [];
+			for (var i = 0; i < imageGroupArray.length; i++) {
+				for (var j = 0; j < imageGroupArray[i].length; j++) {
+					imageArray.push(imageGroupArray[i][j]);
+				}
+			}
+			
+			// Full A-Z Caption List
+			var txtArray = [
+				"A is for Arcade! Our fun time at Timezone. 🕹️",
+				"B is for Baking! (Even if we just bought the cake!) 🎂",
+				"C is for Coffee Dates! The best conversation starter. ☕",
+				"D is for Dolomite Beach! Sunset walks by Manila Bay. 🌅",
+				"E is for Every Single Day I Love You. (A little cheese! 🧀)",
+				"F is for First Date! Where everything began. 💖",
+				"G is for Groceries together! Simpler joy. 🛒",
+				"H is for Hugs! The best place in the world. 🤗",
+				"I is for Inspection Day Side Quest! Mahal supporting my work. 👷‍♂️",
+				"J is for Just us, watching movies all night. 🍿",
+				"K is for Kissing! (Syempre included yan!) 😘",
+				"L is for LDR Video Calls! Unli calls, unli kwento. 📱",
+				"M is for Ocean Park Date! Watching the fish (and you). 🐠",
+				"N is for Night Dates! The city lights and us. ✨",
+				"O is for Our Bahay-Bahayan Date! Simple and cozy. 🏠",
+				"P is for Picnics! (Even the indoor ones.) 🧺",
+				"Q is for Quiet moments, just enjoying your presence. ❤️",
+				"R is for Roadtrip to Tagaytay! The cold breeze and bulalo. 🚗",
+				"S is for Swimming! Pool or beach, as long as I’m with you. 🏊‍♂️",
+				"T is for Thinking of you, always. 💭",
+				"U is for Us. The best team. 👩‍❤️‍👨",
+				"V is for Valentines! (Or any special occasion date.) 🌹",
+				"W is for Walk Dates! Just holding hands. 🤝",
+				"X is for eXtra special you! (Cheat answer! 😄)",
+				"Y is for Your Birthmonth Date! Celebrating YOU. 🎉",
+				"Z is for Zoo (Ocean Park again, maybe?)... Or just Zzz sleeping! 😴 Happy Anniversary, Mahal!"
+			];
+			
+			var len = imageArray.length;
 			var imageIndex = 0;
-			var txtArray = ["你好哇，小可爱~", "我们第一次见面的时候，女票认真的小眼神，嘻嘻", "当时我也有在比心哦~(｡･ω･｡)ﾉ♡",
-			 "第一次去重庆见女票, 小仙女出现啦", "江边，今夜月色真美", "牵爪爪散步，开心~o(≧v≦)o", "咳咳，老大不小了还写情书，真是让人害羞(/ω＼)",
-			 "超级喜欢女票送的兔兔和胡萝卜!!!", "举手手，我是最可爱的(･∀･)", "同款举手手（好吧，还是女票可爱）", "哇哇哇，这么可爱犯规啦", 
-			 "下次去旅游可以叫上我一起吗~", "说，我叠的星星好不好看٩(๑òωó๑)۶", "洪崖洞买的邱邱~", "女票女票，我爱你~", "哒哒哒，逃~"];
-			 var len = imageArray.length;
 			var t = 0;
+
+			// Anniversary Start Date: September 7, 2026 at 8:00 PM
+			var startDate = new Date(2026, 8, 7, 20, 0, 0); 
+
+			function updateTimer() {
+				var now = new Date();
+				var diff = now - startDate;
+
+				if (diff < 0) diff = 0; 
+
+				var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+				var minutes = Math.floor((diff / (1000 * 60)) % 60);
+				var seconds = Math.floor((diff / 1000) % 60);
+
+				if (document.getElementById("d")) document.getElementById("d").innerText = days;
+				if (document.getElementById("h")) document.getElementById("h").innerText = hours;
+				if (document.getElementById("m")) document.getElementById("m").innerText = minutes;
+				if (document.getElementById("s")) document.getElementById("s").innerText = seconds;
+			}
+
+			setInterval(updateTimer, 1000);
+			updateTimer();
 		</script>
 		
 		<script type="text/javascript" src="./js/stars.js"></script>
