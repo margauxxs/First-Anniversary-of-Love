@@ -1,63 +1,80 @@
+/* Base Page & Canvas Setup */
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: #020b14; /* Northern lights night-sky fallback */
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+	display: block;
+}
+
+/* Typewriter Intro Text */
 #typeDiv {
 	position: absolute;
-	top: 45%;
+	top: 42%;
 	left: 0;
 	right: 0;
 	margin: auto;
-	width: 100%;
+	width: 90%;
 	height: 10%;
 	text-align: center;
 }
 
-#txt1 {
-	font-size: 16px;
+#txt1, #txt2 {
+	font-size: 18px;
 	text-align: center;
-	color: white;
-}
-#txt2 {
-	font-size: 16px;
-	text-align: center;
-	color: white;
+	color: #ffffff;
+	text-shadow: 0 0 12px rgba(16, 94, 78, 0.8), 0 0 5px rgba(255, 255, 255, 0.6);
+	font-weight: 300;
+	letter-spacing: 1px;
 }
 
-#content{
+/* Anniversary Timer Header */
+#content {
 	position: absolute;
-	top: 1%;
+	top: 3%;
 	left: 0;
 	right: 0;
 	margin: auto;
-	width: 100%;
-	height: 20%;
+	width: 90%;
+	height: 18%;
 }
 
-#together{
-	font-size: 25px;
+#together {
+	font-size: 24px;
 	text-align: center;
-	color: white;
+	color: #ffffff;
+	text-shadow: 0 0 15px rgba(59, 23, 84, 0.9), 0 0 8px rgba(255, 255, 255, 0.8);
+	font-weight: bold;
+	margin-bottom: 5px;
 }
 
-#timer{
+#timer {
 	text-align: center;
-	color: white;
+	color: #e2f7f2;
+	text-shadow: 0 0 10px rgba(16, 94, 78, 0.7);
+	font-size: 16px;
 }
 
-#d{
-	font-size: 19px;
+#d, #h, #m, #s {
+	font-size: 20px;
+	font-weight: bold;
+	color: #6ee7b7; /* Subtle aurora emerald highlight for numbers */
 }
 
-#h{
-	font-size: 19px;
-}
-
-#m{
-	font-size: 19px;
-}
-
-#s{
-	font-size: 19px;
-}
-
-#heartTxt{
+/* Heart Button Trigger */
+#heartTxt {
 	position: absolute;
 	display: table;
 	vertical-align: middle;
@@ -65,24 +82,28 @@
 	left: 0;
 	right: 0;
 	margin: auto;
-	width: 10%;
-	height: 8%;
+	width: 15%;
+	min-width: 120px;
+	max-width: 180px;
+	height: 10%;
 }
 
-#clickMe{
+#clickMe {
 	display: inline-block;
-	font-size: 16px;
+	font-size: 15px;
 	width: 100%;
 	text-align: center;
-	color: white;
+	color: #ffffff;
+	text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+	letter-spacing: 1px;
 }
 
-#heart{
+#heart {
 	width: 100%;
 	height: 100%;
 }
 
-#button{
+#button {
 	background-image: url("../pic/love.png");
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -90,50 +111,48 @@
 	border: none;
 	outline: none;
 	background-position: center;
-	transition: 0.1s;
+	transition: transform 0.2s ease;
 	width: 100%;
 	height: 100%;
-
+	cursor: pointer;
 }
 
 #button:active {
-	width: 92%;
-	height: 92%;
+	transform: scale(0.9);
 }
 
-#imgTxt{
+/* Photo Gallery & Caption Display */
+#imgTxt {
 	position: absolute;
 	display: table;
 	vertical-align: middle;
-	top: 20%;
+	top: 22%;
 	left: 0;
 	right: 0;
 	margin: auto;
-	width: 100%;
-	height: 50%;
+	width: 90%;
+	height: 52%;
 }
 
-#img{
+#img {
 	display: block;
 	left: 0;
 	right: 0;
-	margin: auto;
+	margin: 0 auto 15px auto;
 	width: auto;
-	height: 100%;
+	max-width: 90vw;
+	height: 78%;
+	object-fit: contain;
+	border-radius: 12px;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(16, 94, 78, 0.3);
 }
 
-#Txt{
+#Txt, #tmp {
 	display: inline-block;
 	font-size: 17px;
 	width: 100%;
 	text-align: center;
-	color: white;
-}
-
-#tmp{
-	display: inline-block;
-	font-size: 17px;
-	width: 100%;
-	text-align: center;
-	color: white;
+	color: #ffffff;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 5px rgba(255, 255, 255, 0.5);
+	line-height: 1.4;
 }
