@@ -5,27 +5,82 @@
 		<meta charset="UTF-8">
 		<title>Happy 1st Anniversary, Mahal!</title>
 		<link rel="stylesheet" type="text/css" href="./css/format.css">
+		<style>
+			/* Unblock click pointer events */
+			canvas { pointer-events: none !important; }
+			
+			#heartTxt {
+				position: absolute;
+				top: 70%;
+				left: 0;
+				right: 0;
+				margin: auto;
+				text-align: center;
+				z-index: 9999 !important;
+				pointer-events: auto !important;
+			}
+			
+			#button {
+				display: inline-block;
+				width: 80px;
+				height: 80px;
+				background-color: transparent;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				font-size: 55px;
+				line-height: 80px;
+				z-index: 10000 !important;
+				pointer-events: auto !important;
+			}
+			
+			#clickMe {
+				display: block;
+				font-size: 13px;
+				color: #ffffff;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				margin-top: 5px;
+			}
+
+			#imgTxt {
+				display: none;
+				position: absolute;
+				top: 18%;
+				left: 0;
+				right: 0;
+				margin: auto;
+				text-align: center;
+				z-index: 9999 !important;
+			}
+
+			#img {
+				max-width: 85vw;
+				max-height: 60vh;
+				border-radius: 10px;
+				box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+			}
+
+			#Txt {
+				font-size: 18px;
+				color: #ffffff;
+				font-weight: bold;
+				margin-bottom: 10px;
+				display: block;
+			}
+		</style>
 	</head>
 
 	<body style="margin:0px">
 		<audio id="bgm" autoplay loop preload="auto">
 			<source src="music/music.mp3" type="audio/mpeg">
-			Your browser does not support the audio element.
 		</audio>
 		
 		<canvas></canvas>
 
-		<div id="imgTxt">
-			<span id="Txt"></span> <br />
-			<span id="tmp"></span>
-			<img id="img" src="" alt="Our Memory">
-		</div>
-
-		<div id="heartTxt">
-			<span id="clickMe">Click Below</span>
-			<div id="heart">
-				<button id="button" onclick="play()"></button>
-			</div>
+		<div id="typeDiv">
+			<span id="txt1"></span> <br />
+			<span id="txt2"></span>
 		</div>
 
 		<div id="content">
@@ -38,113 +93,18 @@
 			</div>
 		</div>
 
-		<div id="typeDiv">
-			<span id="txt1"></span> <br />
-			<span id="txt2"></span>
-		</div>		
+		<!-- Interactive Heart Trigger -->
+		<div id="heartTxt">
+			<button id="button" onclick="play()">❤️</button>
+			<span id="clickMe">Click Below</span>
+		</div>
 
-		<script>
-			var ok = 0;
-			var flag = 1;
-			var myImage = document.getElementById("img");
-			var myTxt = document.getElementById("Txt");
-			
-			// 26 Photo Groups (A to Z) - Grouped together
-			var imageGroupArray = [
-				["pic/picA1.JPG", "pic/picA2.JPG", "pic/picA3.JPG", "pic/picA4.JPG"],                     // A: Arcade
-				["pic/picB1.JPG", "pic/picB2.JPG", "pic/picB3.JPG"],                                       // B: Baking
-				["pic/picC1.JPG", "pic/picC2.JPG", "pic/picC3.JPG", "pic/picC4.JPG"],                     // C: Coffee
-				["pic/picD1.JPG", "pic/picD2.JPG", "pic/picD3.JPG"],                                       // D: Dolomite
-				["pic/picE1.JPG", "pic/picE2.JPG"],                                                       // E: Every day
-				["pic/picF1.JPG", "pic/picF2.JPG", "pic/picF3.JPG", "pic/picF4.JPG", "pic/picF5.JPG"],     // F: First date
-				["pic/picG1.jpg", "pic/picG2.jpg", "pic/picG3.jpg", "pic/picG4.jpg"],                     // G: Groceries
-				["pic/picH1.JPG", "pic/picH2.JPG"],                                                       // H: Hugs
-				["pic/picI1.JPG", "pic/picI2.JPG", "pic/picI3.JPG", "pic/picI4.JPG"],                     // I: Inspection Side Quest
-				["pic/picJ1.JPG", "pic/picJ2.JPG", "pic/picJ3.JPG"],                                       // J: Just us
-				["pic/picK1.JPG"],                                                                        // K: Kissing
-				["pic/picL1.JPG", "pic/picL2.JPG", "pic/picL3.JPG", "pic/picL4.JPG", "pic/picL5.JPG"],     // L: LDR Video calls
-				["pic/picM1.JPG", "pic/picM2.JPG", "pic/picM3.JPG", "pic/picM4.JPG"],                     // M: Ocean Park
-				["pic/picN1.JPG", "pic/picN2.JPG", "pic/picN3.JPG"],                                       // N: Night dates
-				["pic/picO1.JPG", "pic/picO2.JPG", "pic/picO3.JPG"],                                       // O: Bahay-Bahayan
-				["pic/picP1.JPG", "pic/picP2.JPG", "pic/picP3.JPG", "pic/picP4.JPG", "pic/picP5.JPG"],     // P: Picnics/Pagkain
-				["pic/picQ1.JPG"],                                                                        // Q: Quiet moments
-				["pic/picR1.JPG", "pic/picR2.JPG", "pic/picR3.JPG", "pic/picR4.JPG"],                     // R: Roadtrip
-				["pic/picS1.JPG", "pic/picS2.JPG", "pic/picS3.JPG", "pic/picS4.JPG"],                     // S: Swimming
-				["pic/picT1.JPG", "pic/picT2.JPG", "pic/picT3.JPG", "pic/picT4.JPG", "pic/picT5.JPG", "pic/picT6.JPG"], // T: Tagaytay
-				["pic/picU1.JPG"],                                                                        // U: Us
-				["pic/picV1.JPG", "pic/picV2.JPG", "pic/picV3.JPG"],                                       // V: Voyage
-				["pic/picW1.jpg", "pic/picW2.jpg", "pic/picW3.jpg", "pic/picW4.jpg"],                     // W: Walk dates
-				["pic/picX1.JPG", "pic/picX2.JPG", "pic/picX3.JPG"],                                       // X: eXtra special
-				["pic/picY1.JPG", "pic/picY2.JPG", "pic/picY3.jpg", "pic/picY4.jpg"],                     // Y: Birthmonth Date
-				["pic/picZ1.JPG", "pic/picZ2.JPG", "pic/picZ3.JPG"]                                       // Z: Zzz sleeping
-			];
+		<!-- Memory Gallery Display -->
+		<div id="imgTxt">
+			<span id="Txt"></span> <br />
+			<img id="img" src="" alt="Our Memory">
+		</div>
 
-			// Flattened array backup
-			var imageArray = [];
-			for (var i = 0; i < imageGroupArray.length; i++) {
-				for (var j = 0; j < imageGroupArray[i].length; j++) {
-					imageArray.push(imageGroupArray[i][j]);
-				}
-			}
-			
-			// Full A-Z Captions
-			var txtArray = [
-				"A is for Arcade! Our fun time at Timezone. 🕹️",
-				"B is for Baking! (Sunod sunuran ka lang hahaha) 🎂",
-				"C is for Coffee Dates! Na ikaw lang coffee akin non coffee. ☕",
-				"D is for Dolomite Beach! Meet kahit may toyo. 🌅",
-				"E is for Every Single Day I Love You. (Jejemon hahaha 🧀)",
-				"F is for First Date! Where everything began. 💖",
-				"G is for Golfing! Beginner. 🛒",
-				"H is for Hugs! Backhugsssss. 🤗",
-				"I is for Inspection Day Side Quest! Kahilo minsan byahe hahaha. 👷‍♂️",
-				"J is for Just us, ayieeeee hahaha.💖",
-				"K is for Kissing! 😘",
-				"L is for LDR Video Calls! Unli calls, unli tampo. 📱",
-				"M is for Ocean Park Date! Ano relate? hahaha. 🐠",
-				"N is for Night Dates! Esplanade. ✨",
-				"O is for Our Bahay-Bahayan Date! Simple and cozy. 🏠",
-				"P is for Pagkain! 🧀",
-				"Q is for Quiet moments, kasi magkaaway hahhaha. ❤️",
-				"R is for Roadtrip! Mapaumaga, gabi, nalipad sa kalsada hahaha. 🚗",
-				"S is for Swimming! Pool sa taas ng building. 🏊‍♂️",
-				"T is for Tagaytay. 💭",
-				"U is for Us. 👩‍❤️‍👨",
-				"V is for Voyage! (First time makasakay sa ferry) 🌹",
-				"W is for Walk Dates! Mga mukhang bagong gising at uwing pawisan. 🤝",
-				"X is for eXtra special meeeee! 😄",
-				"Y is for You and Me Birthmonth Date! 🎉",
-				"Z is for Zzz sleeping! 😴 Happy Anniversary, Mahal!"
-			];
-			
-			var len = imageArray.length;
-			var imageIndex = 0;
-			var t = 0;
-
-			// Timer setup
-			var startDate = new Date(2026, 8, 7, 21, 21, 0); 
-
-			function updateTimer() {
-				var now = new Date();
-				var diff = now - startDate;
-
-				if (diff < 0) diff = 0; 
-
-				var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-				var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-				var minutes = Math.floor((diff / (1000 * 60)) % 60);
-				var seconds = Math.floor((diff / 1000) % 60);
-
-				if (document.getElementById("d")) document.getElementById("d").innerText = days;
-				if (document.getElementById("h")) document.getElementById("h").innerText = (hours < 10 ? "0" + hours : hours);
-				if (document.getElementById("m")) document.getElementById("m").innerText = (minutes < 10 ? "0" + minutes : minutes);
-				if (document.getElementById("s")) document.getElementById("s").innerText = (seconds < 10 ? "0" + seconds : seconds);
-			}
-
-			setInterval(updateTimer, 1000);
-			updateTimer();
-		</script>
-		
 		<script type="text/javascript" src="./js/stars.js"></script>
 		<script type="text/javascript" src="./js/typeWriter.js"></script>
 		<script type="text/javascript" src="./js/date.js"></script>
