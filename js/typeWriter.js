@@ -1,7 +1,7 @@
-
 let i = 0;
-let text1 = "Hey! Miss Qiu.";
-let text2 = "Today is the Big Day."
+// Personalized typewriter text for Mahal
+let text1 = "Happy 1st Anniversary, Mahal!";
+let text2 = "Welcome to our special memory page. ❤️";
 let speed = 100;
 
 function typeWriter(text, para){
@@ -23,14 +23,11 @@ function typeWriter(text, para){
 
 var typeInterval;
 
-//window.onload = function() {
-//	window.onload = function(){};
-   	typeInterval = setInterval(function(){
-		if(ok == 0){
-			typeWriter(text1, "txt1");
-		}
-		else if(ok == 1){
-			typeWriter(text2, "txt2");
-		}
-	}, 100);
-//};
+typeInterval = setInterval(function(){
+	if(ok == 0){
+		typeWriter(text1, "txt1");
+	}
+	else if(ok == 1){
+		typeWriter(text2, "txt2");
+	}
+}, 100);
