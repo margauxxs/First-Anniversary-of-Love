@@ -1,11 +1,17 @@
-
 var dv = document.getElementById("content");
 dv.style.opacity = 0;
 var val = 0;
 
 function timer(){
-	var start = new Date(2018, 0, 27, 20, 53);
+	// Target Date: September 7, 2025 at 9:21 PM (21:21)
+	// Note: Month index in JS is 0-indexed (January = 0, September = 8)
+	var start = new Date(2025, 8, 7, 21, 21, 0);
 	var t = new Date() - start;
+
+	if (t < 0) {
+		t = 0; // Guard against negative values before start time
+	}
+
 	var d = Math.floor(t / 1000 / 60 / 60 / 24);
 	var h = Math.floor(t / 1000 / 60 / 60 % 24);
 	if(h < 10){
@@ -48,4 +54,4 @@ fadeInterval = setInterval(function(){
 		clearInterval(fadeInterval);
 		fadeinInterval = setInterval(fadein, 50);
 	}
-}, 50)
+}, 50);
