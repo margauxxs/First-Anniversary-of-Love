@@ -1,8 +1,17 @@
+// Ensure button starts hidden
 var btn = document.getElementById("heartTxt");
-btn.style.opacity = 0;
+if (btn) btn.style.opacity = 0;
 var btnVal = 0;
 
-// Helper function: Maps current photo index (0 to 83) back to its A-Z caption (0 to 25)
+// Missing DOM element references & state variables
+var myImage = document.getElementById("img");
+var myTxt = document.getElementById("Txt");
+var imageIndex = 0;
+var len = typeof imageArray !== "undefined" ? imageArray.length : 0;
+var flag = 0;
+var t = 0;
+
+// Helper function: Maps current photo index back to its A-Z caption
 function getCaptionIndex(idx) {
 	if (typeof imageGroupArray === "undefined") {
 		return idx; // Fallback if imageGroupArray is missing
@@ -18,14 +27,14 @@ function getCaptionIndex(idx) {
 }
 
 function showImage(){
-	//document.getElementById("imgTxt").style.opacity = 0;
-	myImage.setAttribute("src", imageArray[imageIndex]);
+	if (myImage && imageArray && imageArray.length > 0) {
+		myImage.setAttribute("src", imageArray[imageIndex]);
+	}
+	if (myTxt && typeof txtArray !== "undefined") {
+		var capIdx = getCaptionIndex(imageIndex);
+		myTxt.innerHTML = txtArray[capIdx] || "";
+	}
 	
-	// Sets caption based on current photo group
-	var capIdx = getCaptionIndex(imageIndex);
-	myTxt.innerHTML = txtArray[capIdx];
-	
-	//document.getElementById("imgTxt").style.opacity = 1 - flag;
 	imageIndex++;
 	if(imageIndex >= len){
 		imageIndex = 0;
@@ -34,27 +43,42 @@ function showImage(){
 
 function play(){
 	if(t == 0){
-		myImage.setAttribute("src", "");
-		myTxt.innerHTML = "";
+		if (myImage) myImage.setAttribute("src", "");
+		if (myTxt) myTxt.innerHTML = "";
 		imageIndex = 0;
 		clearInterval(showImageInterval);
 	}
 	flag = 1 - flag;
-	document.getElementById("typeDiv").style.opacity = flag;
-	document.getElementById("imgTxt").style.opacity = 1 - flag;
+	
+	var typeDiv = document.getElementById("typeDiv");
+	var imgTxt = document.getElementById("imgTxt");
+	
+	if (typeDiv) typeDiv.style.opacity = flag;
+	
+	if (imgTxt) {
+		// Crucial fix: Must toggle visibility alongside opacity
+		imgTxt.style.visibility = (1 - flag === 1) ? "visible" : "hidden";
+		imgTxt.style.opacity = 1 - flag;
+	}
+	
 	if(t == 0){
-		//setTimeout(showImage, 1000);
 		setInterval(showImage, 2500);
 	}
 	t++;
 }
 
 function preshowImage(){
-	document.getElementById("imgTxt").style.opacity = 0;
-	myImage.setAttribute("src", imageArray[imageIndex]);
+	var imgTxt = document.getElementById("imgTxt");
+	if (imgTxt) imgTxt.style.opacity = 0;
 	
-	var capIdx = getCaptionIndex(imageIndex);
-	myTxt.innerHTML = txtArray[capIdx];
+	if (myImage && imageArray && imageArray.length > 0) {
+		myImage.setAttribute("src", imageArray[imageIndex]);
+	}
+	
+	if (myTxt && typeof txtArray !== "undefined") {
+		var capIdx = getCaptionIndex(imageIndex);
+		myTxt.innerHTML = txtArray[capIdx] || "";
+	}
 	
 	imageIndex++;
 	if(imageIndex >= len){
@@ -65,11 +89,11 @@ function preshowImage(){
 function buttonFadeIn(){
 	if(btnVal < 1){
 		btnVal += 0.025;
-		btn.style.opacity = btnVal;
+		if (btn) btn.style.opacity = btnVal;
 	}
 	else{
 		clearInterval(buttonInterval);
-		if(ok == 3){
+		if(typeof ok !== "undefined" && ok == 3){
 			ok += 1;
 		}
 	}
@@ -79,8 +103,10 @@ function event(){
 	showImageInterval = setInterval(preshowImage, 100);
 
 	imgInterval = setInterval(function (){
-		if(ok == 3){
-			setTimeout(function(){buttonInterval = setInterval(buttonFadeIn, 50);}, 1500);
+		if(typeof ok !== "undefined" && ok == 3){
+			setTimeout(function(){
+				buttonInterval = setInterval(buttonFadeIn, 50);
+			}, 1500);
 			clearInterval(imgInterval);
 		}
 	}, 50);
