@@ -8,7 +8,7 @@
 	</head>
 
 	<body style="margin:0px">
-		<audio id="bgm" autoplay loop>
+		<audio id="bgm" autoplay loop preload="auto">
 			<source src="music/music.mp3" type="audio/mpeg">
 			Your browser does not support the audio element.
 		</audio>
@@ -18,7 +18,7 @@
 		<div id="imgTxt">
 			<span id="Txt"></span> <br />
 			<span id="tmp"></span>
-			<img id="img" src="">
+			<img id="img" src="" alt="Our Memory">
 		</div>
 
 		<div id="heartTxt">
@@ -31,10 +31,10 @@
 		<div id="content">
 			<h2 id="together">Mahal, we have been together for</h2>
 			<div id="timer">
-				<b id="d"></b> Days 
-				<b id="h"></b> Hours
-				<b id="m"></b> Minutes
-				<b id="s"></b> Seconds
+				<b id="d">0</b> Days 
+				<b id="h">00</b> Hours
+				<b id="m">00</b> Minutes
+				<b id="s">00</b> Seconds
 			</div>
 		</div>
 
@@ -49,34 +49,34 @@
 			var myImage = document.getElementById("img");
 			var myTxt = document.getElementById("Txt");
 			
-			// 26 Photo Groups (A to Z) with 2 to 5 photos each
+			// 26 Photo Groups (A to Z) - Standardized to .jpg extensions
 			var imageGroupArray = [
-				["pic/picA1.jpg", "pic/picA2.jpg", "pic/picA3.jpg", "pic/picA4.jpg"],                     // A: Arcade (4)
-				["pic/picB1.jpg", "pic/picB2.jpg", "pic/picB3.jpg"],                                       // B: Baking (3)
-				["pic/picC1.jpg", "pic/picC2.jpg", "pic/picC3.jpg", "pic/picC4.jpg"],                     // C: Coffee (4)
-				["pic/picD1.jpg", "pic/picD2.jpg", "pic/picD3.jpg"],                                       // D: Dolomite (3)
-				["pic/picE1.jpg", "pic/picE2.jpg"],                                                       // E: Every day (2)
-				["pic/picF1.jpg", "pic/picF2.jpg", "pic/picF3.jpg", "pic/picF4.jpg", "pic/picF5.jpg"],     // F: First date (5)
-				["pic/picG1.heic", "pic/picG2.heic", "pic/picG3.heic", "pic/picG4.heic"],                                       // G: Groceries (3)
-				["pic/picH1.jpg", "pic/picH2.jpg"],                                                       // H: Hugs (2)
-				["pic/picI1.jpg", "pic/picI2.jpg", "pic/picI3.jpg", "pic/picI4.jpg"],                     // I: Inspection Side Quest (4)
-				["pic/picJ1.jpg", "pic/picJ2.jpg", "pic/picJ3.jpg"],                                       // J: Just us movies (3)
-				["pic/picK1.jpg"],                                                       // K: Kissing (2)
-				["pic/picL1.jpg", "pic/picL2.jpg", "pic/picL3.jpg", "pic/picL4.jpg", "pic/picL5.jpg"],     // L: LDR Video calls (5)
-				["pic/picM1.jpg", "pic/picM2.jpg", "pic/picM3.jpg", "pic/picM4.jpg"],                     // M: Manila Ocean Park (4)
-				["pic/picN1.jpg", "pic/picN2.jpg", "pic/picN3.jpg"],                                       // N: Night dates (3)
-				["pic/picO1.jpg", "pic/picO2.jpg", "pic/picO3.jpg"],                                       // O: Our bahay-bahayan (3)
-				["pic/picP1.jpg", "pic/picP2.jpg", "pic/picP3.jpg", "pic/picP4.jpg", "pic/picP5.jpg"],                                                       // P: Picnics (2)
-				["pic/picQ1.jpg"],                                                       // Q: Quiet moments (2)
-				["pic/picR1.jpg", "pic/picR2.jpg", "pic/picR3.jpg", "pic/picR4.jpg"],                     // R: Roadtrip Tagaytay (4)
-				["pic/picS1.jpg", "pic/picS2.jpg", "pic/picS3.jpg", "pic/picS4.jpg"],                     // S: Swimming (4)
-				["pic/picT1.jpg", "pic/picT2.jpg", "pic/picT3.jpg", "pic/picT4.jpg", "pic/picT5.jpg", "pic/picT6.jpg"],                                       // T: Thinking of you (3)
-				["pic/picU1.jpg"],                                                       // U: Us (2)
-				["pic/picV1.jpg", "pic/picV2.jpg", "pic/picV3.jpg"],                                       // V: Valentines (3)
-				["pic/picW1.heic", "pic/picW2.heic", "pic/picW3.heic", "pic/picW4.heic"],                     // W: Walk dates (4)
-				["pic/picX1.jpg", "pic/picX2.jpg", "pic/picX3.jpg"],                                                       // X: eXtra special (2)
-				["pic/picY1.jpg", "pic/picY2.jpg", "pic/picY3.heic", "pic/picY4.heic"],                     // Y: Your birthmonth (4)
-				["pic/picZ1.jpg", "pic/picZ2.jpg", "pic/picZ3.jpg"]                                       // Z: Zzz sleeping (3)
+				["pic/picA1.jpg", "pic/picA2.jpg", "pic/picA3.jpg", "pic/picA4.jpg"],                     // A: Arcade
+				["pic/picB1.jpg", "pic/picB2.jpg", "pic/picB3.jpg"],                                       // B: Baking
+				["pic/picC1.jpg", "pic/picC2.jpg", "pic/picC3.jpg", "pic/picC4.jpg"],                     // C: Coffee
+				["pic/picD1.jpg", "pic/picD2.jpg", "pic/picD3.jpg"],                                       // D: Dolomite
+				["pic/picE1.jpg", "pic/picE2.jpg"],                                                       // E: Every day
+				["pic/picF1.jpg", "pic/picF2.jpg", "pic/picF3.jpg", "pic/picF4.jpg", "pic/picF5.jpg"],     // F: First date
+				["pic/picG1.jpg", "pic/picG2.jpg", "pic/picG3.jpg", "pic/picG4.jpg"],                     // G: Groceries
+				["pic/picH1.jpg", "pic/picH2.jpg"],                                                       // H: Hugs
+				["pic/picI1.jpg", "pic/picI2.jpg", "pic/picI3.jpg", "pic/picI4.jpg"],                     // I: Inspection Side Quest
+				["pic/picJ1.jpg", "pic/picJ2.jpg", "pic/picJ3.jpg"],                                       // J: Just us
+				["pic/picK1.jpg"],                                                                         // K: Kissing
+				["pic/picL1.jpg", "pic/picL2.jpg", "pic/picL3.jpg", "pic/picL4.jpg", "pic/picL5.jpg"],     // L: LDR Video calls
+				["pic/picM1.jpg", "pic/picM2.jpg", "pic/picM3.jpg", "pic/picM4.jpg"],                     // M: Ocean Park
+				["pic/picN1.jpg", "pic/picN2.jpg", "pic/picN3.jpg"],                                       // N: Night dates
+				["pic/picO1.jpg", "pic/picO2.jpg", "pic/picO3.jpg"],                                       // O: Bahay-Bahayan
+				["pic/picP1.jpg", "pic/picP2.jpg", "pic/picP3.jpg", "pic/picP4.jpg", "pic/picP5.jpg"],     // P: Picnics/Pagkain
+				["pic/picQ1.jpg"],                                                                         // Q: Quiet moments
+				["pic/picR1.jpg", "pic/picR2.jpg", "pic/picR3.jpg", "pic/picR4.jpg"],                     // R: Roadtrip
+				["pic/picS1.jpg", "pic/picS2.jpg", "pic/picS3.jpg", "pic/picS4.jpg"],                     // S: Swimming
+				["pic/picT1.jpg", "pic/picT2.jpg", "pic/picT3.jpg", "pic/picT4.jpg", "pic/picT5.jpg", "pic/picT6.jpg"], // T: Tagaytay
+				["pic/picU1.jpg"],                                                                         // U: Us
+				["pic/picV1.jpg", "pic/picV2.jpg", "pic/picV3.jpg"],                                       // V: Voyage
+				["pic/picW1.jpg", "pic/picW2.jpg", "pic/picW3.jpg", "pic/picW4.jpg"],                     // W: Walk dates
+				["pic/picX1.jpg", "pic/picX2.jpg", "pic/picX3.jpg"],                                       // X: eXtra special
+				["pic/picY1.jpg", "pic/picY2.jpg", "pic/picY3.jpg", "pic/picY4.jpg"],                     // Y: Birthmonth Date
+				["pic/picZ1.jpg", "pic/picZ2.jpg", "pic/picZ3.jpg"]                                       // Z: Zzz sleeping
 			];
 
 			// Flattened image array for slideshow engine compatibility
@@ -121,8 +121,8 @@
 			var imageIndex = 0;
 			var t = 0;
 
-			// Anniversary Start Date: September 7, 2025 at 9:21 PM
-			var startDate = new Date(2025, 8, 7, 21, 21, 0); 
+			// Anniversary Target Date: September 7, 2026 at 9:21 PM
+			var startDate = new Date(2026, 8, 7, 21, 21, 0); 
 
 			function updateTimer() {
 				var now = new Date();
@@ -136,9 +136,9 @@
 				var seconds = Math.floor((diff / 1000) % 60);
 
 				if (document.getElementById("d")) document.getElementById("d").innerText = days;
-				if (document.getElementById("h")) document.getElementById("h").innerText = hours;
-				if (document.getElementById("m")) document.getElementById("m").innerText = minutes;
-				if (document.getElementById("s")) document.getElementById("s").innerText = seconds;
+				if (document.getElementById("h")) document.getElementById("h").innerText = (hours < 10 ? "0" + hours : hours);
+				if (document.getElementById("m")) document.getElementById("m").innerText = (minutes < 10 ? "0" + minutes : minutes);
+				if (document.getElementById("s")) document.getElementById("s").innerText = (seconds < 10 ? "0" + seconds : seconds);
 			}
 
 			setInterval(updateTimer, 1000);
