@@ -49,34 +49,34 @@
 			var myImage = document.getElementById("img");
 			var myTxt = document.getElementById("Txt");
 			
-			// 26 Photo Groups (A to Z) - Standardized to .jpg extensions
+			// 26 Photo Groups (A to Z) - Exact extension mapping for .JPG and .jpg
 			var imageGroupArray = [
-				["pic/picA1.jpg", "pic/picA2.jpg", "pic/picA3.jpg", "pic/picA4.jpg"],                     // A: Arcade
-				["pic/picB1.jpg", "pic/picB2.jpg", "pic/picB3.jpg"],                                       // B: Baking
-				["pic/picC1.jpg", "pic/picC2.jpg", "pic/picC3.jpg", "pic/picC4.jpg"],                     // C: Coffee
-				["pic/picD1.jpg", "pic/picD2.jpg", "pic/picD3.jpg"],                                       // D: Dolomite
-				["pic/picE1.jpg", "pic/picE2.jpg"],                                                       // E: Every day
-				["pic/picF1.jpg", "pic/picF2.jpg", "pic/picF3.jpg", "pic/picF4.jpg", "pic/picF5.jpg"],     // F: First date
-				["pic/picG1.jpg", "pic/picG2.jpg", "pic/picG3.jpg", "pic/picG4.jpg"],                     // G: Groceries
-				["pic/picH1.jpg", "pic/picH2.jpg"],                                                       // H: Hugs
-				["pic/picI1.jpg", "pic/picI2.jpg", "pic/picI3.jpg", "pic/picI4.jpg"],                     // I: Inspection Side Quest
-				["pic/picJ1.jpg", "pic/picJ2.jpg", "pic/picJ3.jpg"],                                       // J: Just us
-				["pic/picK1.jpg"],                                                                         // K: Kissing
-				["pic/picL1.jpg", "pic/picL2.jpg", "pic/picL3.jpg", "pic/picL4.jpg", "pic/picL5.jpg"],     // L: LDR Video calls
-				["pic/picM1.jpg", "pic/picM2.jpg", "pic/picM3.jpg", "pic/picM4.jpg"],                     // M: Ocean Park
-				["pic/picN1.jpg", "pic/picN2.jpg", "pic/picN3.jpg"],                                       // N: Night dates
-				["pic/picO1.jpg", "pic/picO2.jpg", "pic/picO3.jpg"],                                       // O: Bahay-Bahayan
-				["pic/picP1.jpg", "pic/picP2.jpg", "pic/picP3.jpg", "pic/picP4.jpg", "pic/picP5.jpg"],     // P: Picnics/Pagkain
-				["pic/picQ1.jpg"],                                                                         // Q: Quiet moments
-				["pic/picR1.jpg", "pic/picR2.jpg", "pic/picR3.jpg", "pic/picR4.jpg"],                     // R: Roadtrip
-				["pic/picS1.jpg", "pic/picS2.jpg", "pic/picS3.jpg", "pic/picS4.jpg"],                     // S: Swimming
-				["pic/picT1.jpg", "pic/picT2.jpg", "pic/picT3.jpg", "pic/picT4.jpg", "pic/picT5.jpg", "pic/picT6.jpg"], // T: Tagaytay
-				["pic/picU1.jpg"],                                                                         // U: Us
-				["pic/picV1.jpg", "pic/picV2.jpg", "pic/picV3.jpg"],                                       // V: Voyage
-				["pic/picW1.jpg", "pic/picW2.jpg", "pic/picW3.jpg", "pic/picW4.jpg"],                     // W: Walk dates
-				["pic/picX1.jpg", "pic/picX2.jpg", "pic/picX3.jpg"],                                       // X: eXtra special
-				["pic/picY1.jpg", "pic/picY2.jpg", "pic/picY3.jpg", "pic/picY4.jpg"],                     // Y: Birthmonth Date
-				["pic/picZ1.jpg", "pic/picZ2.jpg", "pic/picZ3.jpg"]                                       // Z: Zzz sleeping
+				["pic/picA1.JPG", "pic/picA2.JPG", "pic/picA3.JPG", "pic/picA4.JPG"],                     // A: Arcade
+				["pic/picB1.JPG", "pic/picB2.JPG", "pic/picB3.JPG"],                                       // B: Baking
+				["pic/picC1.JPG", "pic/picC2.JPG", "pic/picC3.JPG", "pic/picC4.JPG"],                     // C: Coffee
+				["pic/picD1.JPG", "pic/picD2.JPG", "pic/picD3.JPG"],                                       // D: Dolomite
+				["pic/picE1.JPG", "pic/picE2.JPG"],                                                       // E: Every day
+				["pic/picF1.JPG", "pic/picF2.JPG", "pic/picF3.JPG", "pic/picF4.JPG", "pic/picF5.JPG"],     // F: First date
+				["pic/picG1.jpg", "pic/picG2.jpg", "pic/picG3.jpg", "pic/picG4.jpg"],                     // G: Groceries (.jpg)
+				["pic/picH1.JPG", "pic/picH2.JPG"],                                                       // H: Hugs
+				["pic/picI1.JPG", "pic/picI2.JPG", "pic/picI3.JPG", "pic/picI4.JPG"],                     // I: Inspection Side Quest
+				["pic/picJ1.JPG", "pic/picJ2.JPG", "pic/picJ3.JPG"],                                       // J: Just us
+				["pic/picK1.JPG"],                                                                         // K: Kissing
+				["pic/picL1.JPG", "pic/picL2.JPG", "pic/picL3.JPG", "pic/picL4.JPG", "pic/picL5.JPG"],     // L: LDR Video calls
+				["pic/picM1.JPG", "pic/picM2.JPG", "pic/picM3.JPG", "pic/picM4.JPG"],                     // M: Ocean Park
+				["pic/picN1.JPG", "pic/picN2.JPG", "pic/picN3.JPG"],                                       // N: Night dates
+				["pic/picO1.JPG", "pic/picO2.JPG", "pic/picO3.JPG"],                                       // O: Bahay-Bahayan
+				["pic/picP1.JPG", "pic/picP2.JPG", "pic/picP3.JPG", "pic/picP4.JPG", "pic/picP5.JPG"],     // P: Picnics/Pagkain
+				["pic/picQ1.JPG"],                                                                         // Q: Quiet moments
+				["pic/picR1.JPG", "pic/picR2.JPG", "pic/picR3.JPG", "pic/picR4.JPG"],                     // R: Roadtrip
+				["pic/picS1.JPG", "pic/picS2.JPG", "pic/picS3.JPG", "pic/picS4.JPG"],                     // S: Swimming
+				["pic/picT1.JPG", "pic/picT2.JPG", "pic/picT3.JPG", "pic/picT4.JPG", "pic/picT5.JPG", "pic/picT6.JPG"], // T: Tagaytay
+				["pic/picU1.JPG"],                                                                         // U: Us
+				["pic/picV1.JPG", "pic/picV2.JPG", "pic/picV3.JPG"],                                       // V: Voyage
+				["pic/picW1.jpg", "pic/picW2.jpg", "pic/picW3.jpg", "pic/picW4.jpg"],                     // W: Walk dates (.jpg)
+				["pic/picX1.JPG", "pic/picX2.JPG", "pic/picX3.JPG"],                                       // X: eXtra special
+				["pic/picY1.JPG", "pic/picY2.JPG", "pic/picY3.jpg", "pic/picY4.jpg"],                     // Y: Birthmonth Date (Y1-Y2 .JPG, Y3-Y4 .jpg)
+				["pic/picZ1.JPG", "pic/picZ2.JPG", "pic/picZ3.JPG"]                                       // Z: Zzz sleeping
 			];
 
 			// Flattened image array for slideshow engine compatibility
