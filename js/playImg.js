@@ -1,12 +1,30 @@
-
 var btn = document.getElementById("heartTxt");
 btn.style.opacity = 0;
 var btnVal = 0;
 
+// Helper function: Maps current photo index (0 to 83) back to its A-Z caption (0 to 25)
+function getCaptionIndex(idx) {
+	if (typeof imageGroupArray === "undefined") {
+		return idx; // Fallback if imageGroupArray is missing
+	}
+	var accumulatedCount = 0;
+	for (var i = 0; i < imageGroupArray.length; i++) {
+		accumulatedCount += imageGroupArray[i].length;
+		if (idx < accumulatedCount) {
+			return i;
+		}
+	}
+	return 0;
+}
+
 function showImage(){
 	//document.getElementById("imgTxt").style.opacity = 0;
 	myImage.setAttribute("src", imageArray[imageIndex]);
-	myTxt.innerHTML = txtArray[imageIndex];
+	
+	// Sets caption based on current photo group
+	var capIdx = getCaptionIndex(imageIndex);
+	myTxt.innerHTML = txtArray[capIdx];
+	
 	//document.getElementById("imgTxt").style.opacity = 1 - flag;
 	imageIndex++;
 	if(imageIndex >= len){
@@ -34,7 +52,10 @@ function play(){
 function preshowImage(){
 	document.getElementById("imgTxt").style.opacity = 0;
 	myImage.setAttribute("src", imageArray[imageIndex]);
-	myTxt.innerHTML = txtArray[imageIndex];
+	
+	var capIdx = getCaptionIndex(imageIndex);
+	myTxt.innerHTML = txtArray[capIdx];
+	
 	imageIndex++;
 	if(imageIndex >= len){
 		imageIndex = 0;
@@ -54,10 +75,7 @@ function buttonFadeIn(){
 	}
 }
 
-
-
 function event(){
-
 	showImageInterval = setInterval(preshowImage, 100);
 
 	imgInterval = setInterval(function (){
