@@ -19,30 +19,31 @@ canvas {
 	display: block;
 }
 
-/* Ensure foreground elements stay above canvas */
+/* Ensure all foreground elements stay ABOVE the canvas background */
 #typeDiv, #content, #heartTxt, #imgTxt {
-	z-index: 10;
+	z-index: 100 !important;
 }
 
 /* Typewriter Intro Text */
 #typeDiv {
 	position: absolute;
-	top: 42%;
+	top: 40%;
 	left: 0;
 	right: 0;
 	margin: auto;
 	width: 90%;
-	height: 10%;
 	text-align: center;
 }
 
 #txt1, #txt2 {
-	font-size: 18px;
+	font-size: 20px;
 	text-align: center;
 	color: #ffffff;
-	text-shadow: 0 0 12px rgba(16, 94, 78, 0.8), 0 0 5px rgba(255, 255, 255, 0.6);
-	font-weight: 300;
+	text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 20px rgba(110, 231, 183, 0.8);
+	font-weight: bold;
 	letter-spacing: 1px;
+	display: inline-block;
+	min-height: 24px;
 }
 
 /* Anniversary Timer Header */
@@ -75,14 +76,14 @@ canvas {
 #d, #h, #m, #s {
 	font-size: 20px;
 	font-weight: bold;
-	color: #6ee7b7; /* Subtle aurora emerald highlight for numbers */
+	color: #6ee7b7; /* Emerald highlight for numbers */
 }
 
 /* Heart Button Trigger */
 #heartTxt {
 	position: absolute;
 	display: block;
-	top: 80%;
+	top: 75%;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -134,7 +135,7 @@ canvas {
 #imgTxt {
 	position: absolute;
 	display: block;
-	visibility: hidden; /* JavaScript will make this visible on click */
+	visibility: hidden; /* Turned visible via JavaScript on click */
 	top: 22%;
 	left: 0;
 	right: 0;
