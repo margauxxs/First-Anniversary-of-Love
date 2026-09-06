@@ -1,6 +1,6 @@
 // Universal Typewriter Engine for Anniversary Site
 var str = "Hi Mahal! Happy 1st Anniversary! ❤️";
-var str2 = "I created a little collection of our memories together. Click the heart below! ✨";
+var str2 = "Click below ✨";
 
 var i = 0;
 var j = 0;
@@ -10,9 +10,9 @@ function typeWriter1() {
     if (div1 && i < str.length) {
         div1.innerHTML += str.charAt(i);
         i++;
-        setTimeout(typeWriter1, 80); // Typing speed for first line
+        setTimeout(typeWriter1, 80); // Typing speed for line 1
     } else {
-        setTimeout(typeWriter2, 400); // Pause before second line starts
+        setTimeout(typeWriter2, 400); // Pause before line 2
     }
 }
 
@@ -21,11 +21,11 @@ function typeWriter2() {
     if (div2 && j < str2.length) {
         div2.innerHTML += str2.charAt(j);
         j++;
-        setTimeout(typeWriter2, 60); // Typing speed for second line
+        setTimeout(typeWriter2, 60); // Typing speed for line 2
     }
 }
 
-// Automatically start typing as soon as the page loads
+// Start typing when page loads
 window.addEventListener("DOMContentLoaded", function() {
     setTimeout(typeWriter1, 500);
 });
